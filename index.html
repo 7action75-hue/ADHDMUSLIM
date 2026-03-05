@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#0a0e1a">
+<meta name="description" content="Quran, Prophetic medicine & daily quests for Muslims with ADHD">
+<meta name="mobile-web-app-capable" content="yes">
+<title>FocusBridge 🌿 Islamic ADHD Companion</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@400;500;600;700;800;900&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0e1a;--card:rgba(255,255,255,.04);--card2:rgba(255,255,255,.07);--bdr:rgba(255,255,255,.08);--bdr2:rgba(255,255,255,.06);
+--tx:#f0ede6;--tx2:#c8c4bb;--tx3:#8a8680;--tx4:#5a5754;
+--grn:#34d399;--grn2:rgba(52,211,153,.12);--grn3:rgba(52,211,153,.25);
+--gld:#fbbf24;--gld2:rgba(251,191,36,.1);--gld3:rgba(251,191,36,.2);
+--tl:#22d3ee;--tl2:rgba(34,211,238,.1);--tl3:rgba(34,211,238,.2);
+--prp:#a78bfa;--prp2:rgba(167,139,250,.1);--prp3:rgba(167,139,250,.2);
+--rd:#f87171;--rd2:rgba(248,113,113,.1);--rd3:rgba(248,113,113,.2);
+--spr:cubic-bezier(.34,1.56,.64,1);--glow:0 0 30px rgba(52,211,153,.08)}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--tx);font-family:'Outfit',system-ui,sans-serif;display:flex;justify-content:center}
+#app{width:100%;max-width:430px;height:100%;display:flex;flex-direction:column;background:var(--bg);position:relative}
+#app::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 30% 20%,rgba(52,211,153,.06) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(167,139,250,.04) 0%,transparent 50%);pointer-events:none;z-index:0}
+.sc{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;position:relative;z-index:1}.sc::-webkit-scrollbar{display:none}
+.ar{font-family:'Noto Naskh Arabic','Amiri',serif;direction:rtl;text-align:right;color:var(--gld)}
+.pg{padding:0 16px 90px}
+.c{background:var(--card);border-radius:20px;padding:16px;border:1px solid var(--bdr);margin-bottom:10px;backdrop-filter:blur(20px);box-shadow:var(--glow);transition:transform .2s,box-shadow .2s}
+.c:active{transform:scale(.985)}
+h1{font-size:28px;font-weight:900;color:var(--tx);letter-spacing:-.5px}
+h2{font-size:24px;font-weight:800;color:var(--tx);padding:16px 0 6px;letter-spacing:-.3px}
+h3{font-size:16px;font-weight:700;color:var(--tx)}
+.sub{font-size:13px;color:var(--tx3);line-height:1.6}
+.cap{font-size:10px;font-weight:700;color:var(--tx3);letter-spacing:1.5px;text-transform:uppercase}
+.tg{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;border:1px solid rgba(255,255,255,.1)}
+.nv{height:66px;display:flex;background:rgba(10,14,26,.92);backdrop-filter:blur(24px);border-top:1px solid var(--bdr);flex-shrink:0;position:relative;z-index:2}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:none;border:none;cursor:pointer;color:var(--tx4);font-family:inherit;transition:all .25s}
+.nb.a{color:var(--grn)}.nb.a .ni{background:var(--grn2);border-radius:12px;box-shadow:0 0 16px rgba(52,211,153,.2)}
+.ni{font-size:18px;width:36px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:8px;transition:all .25s}
+.nl{font-size:9px;font-weight:700;letter-spacing:.5px}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:12px;padding:2px 0;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}.tabs::-webkit-scrollbar{display:none}
+.tab{padding:8px 16px;border-radius:20px;background:var(--card);border:1px solid var(--bdr);color:var(--tx3);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;flex-shrink:0;transition:all .2s}
+.tab.a{background:var(--grn2);border-color:var(--grn3);color:var(--grn);box-shadow:0 0 12px rgba(52,211,153,.15)}
+.btn{padding:16px;border-radius:16px;border:none;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;width:100%;transition:all .2s;letter-spacing:.3px}
+.btn:active{transform:scale(.97)}
+.btn1{background:linear-gradient(135deg,#34d399,#22d3ee);color:#0a0e1a}.btn2{background:linear-gradient(135deg,#34d399,#a78bfa);color:#0a0e1a}
+.srch{width:100%;padding:12px 16px 12px 42px;border-radius:16px;background:var(--card);border:1px solid var(--bdr);color:var(--tx);font-size:15px;font-weight:500;font-family:inherit;outline:none;backdrop-filter:blur(10px);transition:border-color .2s}
+.srch:focus{border-color:var(--grn);box-shadow:0 0 20px rgba(52,211,153,.1)}.srch::placeholder{color:var(--tx4)}
+.pp{flex:1;text-align:center;padding:8px 2px;border-radius:12px;border:1px solid var(--bdr);background:var(--card);cursor:pointer;font-family:inherit;transition:all .2s;backdrop-filter:blur(10px)}
+.pp.nx{background:var(--tl2);border-color:var(--tl3);box-shadow:0 0 12px rgba(34,211,238,.1)}.pp.dn{background:var(--grn2);border-color:var(--grn3)}
+.qt{border-left:3px solid transparent;border-radius:4px 20px 20px 4px}.qt.d{opacity:.3}
+.lo{position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.8);backdrop-filter:blur(24px);cursor:pointer}
+.gc{aspect-ratio:1;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--card);border:1px dashed var(--bdr);backdrop-filter:blur(10px)}
+.cb{background:linear-gradient(135deg,rgba(167,139,250,.08),rgba(52,211,153,.08));border:1px solid rgba(167,139,250,.15)}
+.kid h1{font-size:26px}.kid h2{font-size:22px}.kid .ar{font-size:22px!important}.kid .c{padding:20px;border-radius:24px}.kid .btn{padding:18px;font-size:19px}
+@keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes cf{0%{transform:translateY(0)rotate(0);opacity:1}100%{transform:translateY(-140px)rotate(720deg)scale(0);opacity:0}}
+@keyframes sw{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+@keyframes cp{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes pi{0%{transform:scale(.8);opacity:0}100%{transform:scale(1);opacity:1}}
+@keyframes glo{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.afi{animation:fi .35s ease both}
+.glow{animation:glo 3s ease infinite}
+@media(min-width:431px){#app{border:1px solid var(--bdr);box-shadow:0 0 80px rgba(52,211,153,.04),0 0 160px rgba(167,139,250,.03)}}
+@media(max-width:370px){h1{font-size:24px}h2{font-size:20px}.pg{padding:0 14px 90px}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// ═══ REGISTER SERVICE WORKER ═══
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+
+const C={grn:'#34d399',gld:'#fbbf24',tl:'#22d3ee',prp:'#a78bfa',rd:'#f87171',tx:'#f0ede6',tx2:'#c8c4bb',tx3:'#8a8680',tx4:'#5a5754'};
+const RC={common:'#64748b',rare:'#22d3ee',epic:'#a78bfa',legendary:'#fbbf24'};
+const RBG={common:'rgba(100,116,139,.15)',rare:'rgba(34,211,238,.12)',epic:'rgba(167,139,250,.12)',legendary:'rgba(251,191,36,.12)'};
+
+
+// ═══ 80 QURAN VERSES ═══
+const AY=[
+{id:1,s:"Al-Baqarah",v:"2:153",ar:"يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ۚ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",en:"O believers, seek help through patience and prayer. Indeed, Allah is with the patient.",cat:"patience",r:"common"},
+{id:2,s:"Al-Baqarah",v:"2:286",ar:"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا",en:"Allah does not burden a soul beyond its capacity.",cat:"patience",r:"common"},
+{id:3,s:"Ash-Sharh",v:"94:5-6",ar:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا · إِنَّ مَعَ الْعُسْرِ يُسْرًا",en:"For indeed, with hardship comes ease. Indeed, with hardship comes ease.",cat:"patience",r:"epic"},
+{id:4,s:"Al-Baqarah",v:"2:216",ar:"وَعَسَىٰ أَن تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَّكُمْ",en:"Perhaps you dislike something which is good for you. Allah knows, while you know not.",cat:"patience",r:"rare"},
+{id:5,s:"Az-Zumar",v:"39:10",ar:"إِنَّمَا يُوَفَّى الصَّابِرُونَ أَجْرَهُم بِغَيْرِ حِسَابٍ",en:"Indeed, the patient will be given their reward without limit.",cat:"patience",r:"epic"},
+{id:6,s:"Al-Imran",v:"3:200",ar:"يَا أَيُّهَا الَّذِينَ آمَنُوا اصْبِرُوا وَصَابِرُوا وَرَابِطُوا",en:"O believers, be patient, endure, remain stationed, and fear Allah that you may be successful.",cat:"patience",r:"common"},
+{id:7,s:"Yusuf",v:"12:87",ar:"إِنَّهُ لَا يَيْأَسُ مِن رَّوْحِ اللَّهِ إِلَّا الْقَوْمُ الْكَافِرُونَ",en:"Indeed, no one despairs of relief from Allah except the disbelieving people.",cat:"patience",r:"rare"},
+{id:8,s:"Al-Baqarah",v:"2:186",ar:"وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ ۖ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ",en:"When My servants ask about Me — indeed I am near. I respond to the call of the caller when they call.",cat:"tawakkul",r:"rare"},
+{id:9,s:"At-Talaq",v:"65:3",ar:"وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ",en:"Whoever puts their trust in Allah — He is sufficient for them.",cat:"tawakkul",r:"rare"},
+{id:10,s:"Al-Imran",v:"3:173",ar:"حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",en:"Sufficient for us is Allah, and He is the best Disposer of affairs.",cat:"tawakkul",r:"epic"},
+{id:11,s:"At-Tawbah",v:"9:51",ar:"قُل لَّن يُصِيبَنَا إِلَّا مَا كَتَبَ اللَّهُ لَنَا هُوَ مَوْلَانَا",en:"Say: Nothing will befall us except what Allah has decreed for us; He is our Protector.",cat:"tawakkul",r:"common"},
+{id:12,s:"Ibrahim",v:"14:12",ar:"وَمَا لَنَا أَلَّا نَتَوَكَّلَ عَلَى اللَّهِ وَقَدْ هَدَانَا سُبُلَنَا",en:"Why should we not put our trust in Allah when He has guided us to our paths?",cat:"tawakkul",r:"common"},
+{id:13,s:"Al-Mulk",v:"67:29",ar:"قُلْ هُوَ الرَّحْمَـٰنُ آمَنَّا بِهِ وَعَلَيْهِ تَوَكَّلْنَا",en:"Say: He is the Most Merciful; we believe in Him and upon Him we rely.",cat:"tawakkul",r:"rare"},
+{id:14,s:"Az-Zumar",v:"39:53",ar:"لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ ۚ إِنَّ اللَّهَ يَغْفِرُ الذُّنُوبَ جَمِيعًا",en:"Do not despair of the mercy of Allah. Indeed, Allah forgives all sins.",cat:"mercy",r:"epic"},
+{id:15,s:"Al-Araf",v:"7:156",ar:"وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ",en:"My mercy encompasses all things.",cat:"mercy",r:"legendary"},
+{id:16,s:"An-Nisa",v:"4:110",ar:"وَمَن يَعْمَلْ سُوءًا ثُمَّ يَسْتَغْفِرِ اللَّهَ يَجِدِ اللَّهَ غَفُورًا رَّحِيمًا",en:"Whoever does wrong then seeks Allah's forgiveness will find Allah Forgiving and Merciful.",cat:"mercy",r:"rare"},
+{id:17,s:"Al-Hijr",v:"15:49",ar:"نَبِّئْ عِبَادِي أَنِّي أَنَا الْغَفُورُ الرَّحِيمُ",en:"Inform My servants that I am the Forgiving, the Merciful.",cat:"mercy",r:"common"},
+{id:18,s:"Al-Anbiya",v:"21:83",ar:"أَنِّي مَسَّنِيَ الضُّرُّ وَأَنتَ أَرْحَمُ الرَّاحِمِينَ",en:"Indeed, adversity has touched me, and You are the Most Merciful of the merciful.",cat:"mercy",r:"rare"},
+{id:19,s:"Al-Baqarah",v:"2:218",ar:"أُولَـٰئِكَ يَرْجُونَ رَحْمَتَ اللَّهِ ۚ وَاللَّهُ غَفُورٌ رَّحِيمٌ",en:"Those hope for the mercy of Allah, and Allah is Forgiving and Merciful.",cat:"mercy",r:"common"},
+{id:20,s:"Ibrahim",v:"14:7",ar:"لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ",en:"If you are grateful, I will surely increase you in favor.",cat:"gratitude",r:"rare"},
+{id:21,s:"Ar-Rahman",v:"55:13",ar:"فَبِأَيِّ آلَاءِ رَبِّكُمَا تُكَذِّبَانِ",en:"So which of the favors of your Lord would you deny?",cat:"gratitude",r:"rare"},
+{id:22,s:"An-Nahl",v:"16:18",ar:"وَإِن تَعُدُّوا نِعْمَةَ اللَّهِ لَا تُحْصُوهَا",en:"If you tried to count the blessings of Allah, you could never enumerate them.",cat:"gratitude",r:"common"},
+{id:23,s:"Luqman",v:"31:12",ar:"وَمَن يَشْكُرْ فَإِنَّمَا يَشْكُرُ لِنَفْسِهِ",en:"Whoever is grateful — it is only for their own good.",cat:"gratitude",r:"common"},
+{id:24,s:"An-Naml",v:"27:40",ar:"هَـٰذَا مِن فَضْلِ رَبِّي لِيَبْلُوَنِي أَأَشْكُرُ أَمْ أَكْفُرُ",en:"This is from the favor of my Lord, to test whether I will be grateful or ungrateful.",cat:"gratitude",r:"rare"},
+{id:25,s:"Ar-Ra'd",v:"13:28",ar:"أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",en:"Truly, in the remembrance of Allah do hearts find rest.",cat:"dhikr",r:"rare"},
+{id:26,s:"Al-Baqarah",v:"2:152",ar:"فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ",en:"Remember Me, and I will remember you. Be grateful to Me, and do not deny Me.",cat:"dhikr",r:"epic"},
+{id:27,s:"Al-Ahzab",v:"33:41",ar:"يَا أَيُّهَا الَّذِينَ آمَنُوا اذْكُرُوا اللَّهَ ذِكْرًا كَثِيرًا",en:"O believers, remember Allah with much remembrance.",cat:"dhikr",r:"common"},
+{id:28,s:"Al-Fajr",v:"89:27-30",ar:"يَا أَيَّتُهَا النَّفْسُ الْمُطْمَئِنَّةُ · ارْجِعِي إِلَىٰ رَبِّكِ رَاضِيَةً مَّرْضِيَّةً",en:"O tranquil soul, return to your Lord, well-pleased and pleasing to Him.",cat:"dhikr",r:"legendary"},
+{id:29,s:"Al-Hashr",v:"59:22",ar:"هُوَ اللَّهُ الَّذِي لَا إِلَـٰهَ إِلَّا هُوَ ۖ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ ۖ هُوَ الرَّحْمَـٰنُ الرَّحِيمُ",en:"He is Allah, other than whom there is no deity, Knower of the unseen and the witnessed. He is the Most Gracious, Most Merciful.",cat:"dhikr",r:"epic"},
+{id:30,s:"Al-Isra",v:"17:82",ar:"وَنُنَزِّلُ مِنَ الْقُرْآنِ مَا هُوَ شِفَاءٌ وَرَحْمَةٌ لِّلْمُؤْمِنِينَ",en:"We send down from the Quran that which is healing and mercy for the believers.",cat:"healing",r:"legendary"},
+{id:31,s:"An-Nahl",v:"16:69",ar:"يَخْرُجُ مِن بُطُونِهَا شَرَابٌ فِيهِ شِفَاءٌ لِّلنَّاسِ",en:"From their bellies comes a drink in which there is healing for people.",cat:"healing",r:"legendary"},
+{id:32,s:"Ash-Shuara",v:"26:80",ar:"وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ",en:"And when I am ill, it is He who cures me.",cat:"healing",r:"rare"},
+{id:33,s:"Fussilat",v:"41:44",ar:"قُلْ هُوَ لِلَّذِينَ آمَنُوا هُدًى وَشِفَاءٌ",en:"Say: It is for those who believe, a guidance and a cure.",cat:"healing",r:"epic"},
+{id:34,s:"Yunus",v:"10:57",ar:"يَا أَيُّهَا النَّاسُ قَدْ جَاءَتْكُم مَّوْعِظَةٌ مِّن رَّبِّكُمْ وَشِفَاءٌ لِّمَا فِي الصُّدُورِ",en:"O mankind, there has come to you instruction from your Lord and healing for what is in the hearts.",cat:"healing",r:"rare"},
+{id:35,s:"Al-Ankabut",v:"29:69",ar:"وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا",en:"Those who strive for Us — We will surely guide them to Our ways.",cat:"effort",r:"common"},
+{id:36,s:"Al-Inshirah",v:"94:7-8",ar:"فَإِذَا فَرَغْتَ فَانصَبْ · وَإِلَىٰ رَبِّكَ فَارْغَب",en:"So when you have finished a task, stand for another. And to your Lord direct your longing.",cat:"effort",r:"common"},
+{id:37,s:"Muhammad",v:"47:7",ar:"إِن تَنصُرُوا اللَّهَ يَنصُرْكُمْ وَيُثَبِّتْ أَقْدَامَكُمْ",en:"If you support Allah, He will support you and plant firmly your feet.",cat:"effort",r:"common"},
+{id:38,s:"Al-Imran",v:"3:139",ar:"وَلَا تَهِنُوا وَلَا تَحْزَنُوا وَأَنتُمُ الْأَعْلَوْنَ إِن كُنتُم مُّؤْمِنِينَ",en:"Do not weaken and do not grieve — you will be superior if you are true believers.",cat:"effort",r:"epic"},
+{id:39,s:"Al-Baqarah",v:"2:286b",ar:"رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا",en:"Our Lord, do not impose blame on us if we forget or make a mistake.",cat:"effort",r:"common"},
+{id:40,s:"Al-Baqarah",v:"2:45",ar:"وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ",en:"Seek help through patience and prayer — it is difficult indeed, except for the humbly devout.",cat:"effort",r:"rare"},
+{id:41,s:"Ghafir",v:"40:60",ar:"وَقَالَ رَبُّكُمُ ادْعُونِي أَسْتَجِبْ لَكُمْ",en:"And your Lord says: Call upon Me; I will respond to you.",cat:"dua",r:"epic"},
+{id:42,s:"Al-Baqarah",v:"2:201",ar:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",en:"Our Lord, give us good in this world and good in the Hereafter, and protect us from the Fire.",cat:"dua",r:"common"},
+{id:43,s:"Al-Imran",v:"3:8",ar:"رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا",en:"Our Lord, let not our hearts deviate after You have guided us, and grant us mercy.",cat:"dua",r:"rare"},
+{id:44,s:"Al-Furqan",v:"25:74",ar:"رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ",en:"Our Lord, grant us from our spouses and offspring comfort to our eyes.",cat:"dua",r:"rare"},
+{id:45,s:"Al-Araf",v:"7:55",ar:"ادْعُوا رَبَّكُمْ تَضَرُّعًا وَخُفْيَةً",en:"Call upon your Lord in humility and privately.",cat:"dua",r:"common"},
+{id:46,s:"Al-Baqarah",v:"2:168",ar:"يَا أَيُّهَا النَّاسُ كُلُوا مِمَّا فِي الْأَرْضِ حَلَالًا طَيِّبًا",en:"O mankind, eat from the earth what is lawful and wholesome.",cat:"food",r:"common"},
+{id:47,s:"An-Nahl",v:"16:11",ar:"يُنبِتُ لَكُم بِهِ الزَّرْعَ وَالزَّيْتُونَ وَالنَّخِيلَ وَالْأَعْنَابَ",en:"He grows for you crops, olives, palm trees, and grapes.",cat:"food",r:"rare"},
+{id:48,s:"Al-Araf",v:"7:31",ar:"كُلُوا وَاشْرَبُوا وَلَا تُسْرِفُوا ۚ إِنَّهُ لَا يُحِبُّ الْمُسْرِفِينَ",en:"Eat and drink, but do not be excessive. He does not love those who commit excess.",cat:"food",r:"epic"},
+{id:49,s:"Al-Muminun",v:"23:51",ar:"يَا أَيُّهَا الرُّسُلُ كُلُوا مِنَ الطَّيِّبَاتِ وَاعْمَلُوا صَالِحًا",en:"O messengers, eat from the good foods and do righteousness.",cat:"food",r:"rare"},
+{id:50,s:"An-Nahl",v:"16:114",ar:"فَكُلُوا مِمَّا رَزَقَكُمُ اللَّهُ حَلَالًا طَيِّبًا وَاشْكُرُوا نِعْمَتَ اللَّهِ",en:"Eat from what Allah has provided you, lawful and good, and be grateful.",cat:"food",r:"common"},
+{id:51,s:"Taha",v:"20:114",ar:"وَقُل رَّبِّ زِدْنِي عِلْمًا",en:"And say: My Lord, increase me in knowledge.",cat:"knowledge",r:"rare"},
+{id:52,s:"Al-Alaq",v:"96:1-3",ar:"اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ · خَلَقَ الْإِنسَانَ مِنْ عَلَقٍ · اقْرَأْ وَرَبُّكَ الْأَكْرَمُ",en:"Read in the name of your Lord who created — created man from a clinging substance. Read, and your Lord is the Most Generous.",cat:"knowledge",r:"epic"},
+{id:53,s:"Az-Zumar",v:"39:9b",ar:"هَلْ يَسْتَوِي الَّذِينَ يَعْلَمُونَ وَالَّذِينَ لَا يَعْلَمُونَ",en:"Are those who know equal to those who do not know?",cat:"knowledge",r:"common"},
+{id:54,s:"Al-Mujadila",v:"58:11",ar:"يَرْفَعِ اللَّهُ الَّذِينَ آمَنُوا مِنكُمْ وَالَّذِينَ أُوتُوا الْعِلْمَ دَرَجَاتٍ",en:"Allah raises those who believe and those given knowledge by degrees.",cat:"knowledge",r:"rare"},
+{id:55,s:"Al-Baqarah",v:"2:269",ar:"وَمَن يُؤْتَ الْحِكْمَةَ فَقَدْ أُوتِيَ خَيْرًا كَثِيرًا",en:"Whoever is given wisdom has been given much good.",cat:"knowledge",r:"common"},
+{id:56,s:"Al-Fatiha",v:"1:1-4",ar:"بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ · الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ · الرَّحْمَـٰنِ الرَّحِيمِ · مَالِكِ يَوْمِ الدِّينِ",en:"In the name of Allah, Most Gracious, Most Merciful. All praise is for Allah, Lord of all worlds. The Most Gracious, Most Merciful. Master of the Day of Judgment.",cat:"begin",r:"common"},
+{id:57,s:"Al-Fatiha",v:"1:5-7",ar:"إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ · اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",en:"You alone we worship, and You alone we ask for help. Guide us to the straight path.",cat:"begin",r:"common"},
+{id:58,s:"Al-Ikhlas",v:"112:1-4",ar:"قُلْ هُوَ اللَّهُ أَحَدٌ · اللَّهُ الصَّمَدُ · لَمْ يَلِدْ وَلَمْ يُولَدْ · وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",en:"Say: He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born. Nor is there any equivalent.",cat:"begin",r:"epic"},
+{id:59,s:"Al-Falaq",v:"113:1-5",ar:"قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ · مِن شَرِّ مَا خَلَقَ",en:"Say: I seek refuge in the Lord of daybreak, from the evil of what He created.",cat:"begin",r:"common"},
+{id:60,s:"An-Nas",v:"114:1-6",ar:"قُلْ أَعُوذُ بِرَبِّ النَّاسِ · مَلِكِ النَّاسِ · إِلَـٰهِ النَّاسِ",en:"Say: I seek refuge in the Lord of mankind, the King of mankind, the God of mankind.",cat:"begin",r:"common"},
+{id:61,s:"Al-Asr",v:"103:1-3",ar:"وَالْعَصْرِ · إِنَّ الْإِنسَانَ لَفِي خُسْرٍ · إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ",en:"By time, mankind is in loss — except those who believe, do good, urge truth, and urge patience.",cat:"time",r:"common"},
+{id:62,s:"Al-Hashr",v:"59:18",ar:"يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَلْتَنظُرْ نَفْسٌ مَّا قَدَّمَتْ لِغَدٍ",en:"O believers, fear Allah and let every soul look to what it has put forth for tomorrow.",cat:"time",r:"rare"},
+{id:63,s:"Al-Kahf",v:"18:46",ar:"وَالْبَاقِيَاتُ الصَّالِحَاتُ خَيْرٌ عِندَ رَبِّكَ ثَوَابًا",en:"But the enduring good deeds are better with your Lord in reward and better in hope.",cat:"time",r:"rare"},
+{id:64,s:"Ar-Rahman",v:"55:1-4",ar:"الرَّحْمَـٰنُ · عَلَّمَ الْقُرْآنَ · خَلَقَ الْإِنسَانَ · عَلَّمَهُ الْبَيَانَ",en:"The Most Merciful — taught the Quran — created mankind — taught them speech.",cat:"nature",r:"epic"},
+{id:65,s:"At-Tin",v:"95:4",ar:"لَقَدْ خَلَقْنَا الْإِنسَانَ فِي أَحْسَنِ تَقْوِيمٍ",en:"We have certainly created man in the best of form.",cat:"nature",r:"rare"},
+{id:66,s:"Adh-Dhariyat",v:"51:56",ar:"وَمَا خَلَقْتُ الْجِنَّ وَالْإِنسَ إِلَّا لِيَعْبُدُونِ",en:"I did not create the jinn and mankind except to worship Me.",cat:"nature",r:"common"},
+{id:67,s:"Al-Baqarah",v:"2:238",ar:"حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَىٰ",en:"Guard strictly your prayers, especially the middle prayer.",cat:"salah",r:"common"},
+{id:68,s:"Al-Ankabut",v:"29:45",ar:"إِنَّ الصَّلَاةَ تَنْهَىٰ عَنِ الْفَحْشَاءِ وَالْمُنكَرِ",en:"Indeed, prayer prohibits immorality and wrongdoing.",cat:"salah",r:"rare"},
+{id:69,s:"Al-Ma'arij",v:"70:19-23",ar:"إِنَّ الْإِنسَانَ خُلِقَ هَلُوعًا · إِلَّا الْمُصَلِّينَ",en:"Indeed, mankind was created anxious — except those who pray, those constant in their prayer.",cat:"salah",r:"epic"},
+{id:70,s:"An-Nisa",v:"4:103",ar:"إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا",en:"Indeed, prayer has been decreed upon the believers at fixed times.",cat:"salah",r:"common"},
+{id:71,s:"Taha",v:"20:14",ar:"إِنَّنِي أَنَا اللَّهُ لَا إِلَـٰهَ إِلَّا أَنَا فَاعْبُدْنِي وَأَقِمِ الصَّلَاةَ لِذِكْرِي",en:"Indeed, I am Allah. There is no deity except Me, so worship Me and establish prayer for My remembrance.",cat:"salah",r:"common"},
+{id:72,s:"Ar-Rum",v:"30:21",ar:"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا",en:"Among His signs is that He created for you mates that you may find tranquility in them.",cat:"family",r:"rare"},
+{id:73,s:"Al-Hujurat",v:"49:13",ar:"يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا",en:"O mankind, We created you from male and female and made you peoples and tribes that you may know one another.",cat:"family",r:"common"},
+{id:74,s:"Luqman",v:"31:14",ar:"وَوَصَّيْنَا الْإِنسَانَ بِوَالِدَيْهِ",en:"We enjoined upon man care for his parents. His mother carried him in weakness upon weakness.",cat:"family",r:"common"},
+{id:75,s:"An-Nisa",v:"4:36",ar:"وَاعْبُدُوا اللَّهَ وَلَا تُشْرِكُوا بِهِ شَيْئًا ۖ وَبِالْوَالِدَيْنِ إِحْسَانًا",en:"Worship Allah and associate nothing with Him, and be good to parents.",cat:"family",r:"common"},
+{id:76,s:"Maryam",v:"19:25-26",ar:"وَهُزِّي إِلَيْكِ بِجِذْعِ النَّخْلَةِ تُسَاقِطْ عَلَيْكِ رُطَبًا جَنِيًّا · فَكُلِي وَاشْرَبِي وَقَرِّي عَيْنًا",en:"Shake toward you the trunk of the palm tree; it will drop fresh dates. So eat and drink and be contented.",cat:"food",r:"rare"},
+{id:77,s:"At-Tin",v:"95:1-2",ar:"وَالتِّينِ وَالزَّيْتُونِ · وَطُورِ سِينِينَ",en:"By the fig and the olive. And by Mount Sinai.",cat:"food",r:"common"},
+{id:78,s:"Ar-Rahman",v:"55:68",ar:"فِيهِمَا فَاكِهَةٌ وَنَخْلٌ وَرُمَّانٌ",en:"In both gardens are fruit, palm trees, and pomegranates.",cat:"food",r:"common"},
+{id:79,s:"Al-Baqarah",v:"2:164",ar:"إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ ... لَآيَاتٍ لِّقَوْمٍ يَعْقِلُونَ",en:"In the creation of heavens and earth are signs for those who reason.",cat:"nature",r:"common"},
+{id:80,s:"Al-Mu'minun",v:"23:115",ar:"أَفَحَسِبْتُمْ أَنَّمَا خَلَقْنَاكُمْ عَبَثًا",en:"Did you think We created you in vain and that to Us you would not be returned?",cat:"time",r:"common"},
+];
+const AYCAT=[{id:"all",l:"All ("+AY.length+")"},{id:"patience",l:"Patience"},{id:"tawakkul",l:"Trust"},{id:"mercy",l:"Mercy"},{id:"gratitude",l:"Gratitude"},{id:"dhikr",l:"Dhikr"},{id:"healing",l:"Healing"},{id:"effort",l:"Effort"},{id:"dua",l:"Duas"},{id:"food",l:"Food"},{id:"knowledge",l:"Knowledge"},{id:"begin",l:"Surahs"},{id:"salah",l:"Salah"},{id:"time",l:"Time"},{id:"nature",l:"Creation"},{id:"family",l:"Family"}];
+
+// ═══ PROPHETIC MEDICINE — 19 entries (added ginger, milk, vinegar, watermelon) ═══
+const MD=[
+{id:"dates",n:"Dates (Tamr)",i:"🫒",cat:"sunnah",h:1,had:"'Whoever eats seven ajwa dates in the morning will not be harmed.' — Bukhari 5445",qr:"Shake toward you the trunk of the palm tree; it will drop fresh dates. — Maryam 19:25",sci:"Iron, potassium (696mg), magnesium. Natural sugars give sustained energy. Tryptophan → serotonin → melatonin.",adhd:"Stable blood sugar = stable focus. Magnesium supports dopamine receptors. Replaces sugar cravings.",dose:"3-7 dates each morning with water.",nut:["Iron","Potassium","Magnesium","Fiber","B6"]},
+{id:"honey",n:"Raw Honey (Asal)",i:"🍯",cat:"sunnah",h:1,had:"'Make use of the two cures: honey and the Quran.' — Ibn Majah 3452",qr:"From their bellies comes a drink in which is healing. — An-Nahl 16:69",sci:"200+ bioactive compounds. Prebiotic feeding gut bacteria that produce 90% of serotonin.",adhd:"Gut-brain axis is critical for ADHD. Healthy gut = better serotonin = better mood and impulse control.",dose:"1-2 tbsp daily. Replace refined sugar.",nut:["Enzymes","Prebiotics","Flavonoids","Amino Acids"]},
+{id:"blackseed",n:"Black Seed (Habbatus Sauda)",i:"⚫",cat:"sunnah",h:1,had:"'In the black seed is a cure for every disease except death.' — Bukhari 5688",qr:"",sci:"Thymoquinone increases BDNF — grows new brain cells. Anti-inflammatory, neuroprotective.",adhd:"BDNF is often low in ADHD. Thymoquinone modulates dopamine and serotonin. Reduces neuroinflammation.",dose:"1 tsp oil or crushed seeds daily with honey.",nut:["Thymoquinone","Thymol","Omega-6","Omega-9"]},
+{id:"olive",n:"Olive Oil (Zayt)",i:"🫒",cat:"sunnah",h:1,had:"'Eat olive oil and anoint with it, for it comes from a blessed tree.' — Tirmidhi 1851",qr:"Lit from a blessed olive tree. — An-Nur 24:35",sci:"73% oleic acid crosses blood-brain barrier. Polyphenols equal to ibuprofen for inflammation.",adhd:"Brain is 60% fat. Oleic acid repairs myelin sheaths = faster neural signaling = better executive function.",dose:"2-4 tbsp daily. Extra virgin cold-pressed only.",nut:["Oleic Acid","Polyphenols","Vitamin E","Vitamin K"]},
+{id:"talbinah",n:"Talbinah (Barley)",i:"🌾",cat:"sunnah",h:1,had:"'It soothes the grieving heart and relieves sadness.' — Bukhari 5689",qr:"",sci:"Complex carbs = 3-4 hours steady glucose. B-vitamins for serotonin synthesis. Beta-glucan for gut health.",adhd:"Sustained energy without crash = sustained attention. Calming effect aligns with serotonin research.",dose:"Barley flour + milk + honey. Warm.",nut:["B-Vitamins","Beta-Glucan","Fiber","Tryptophan"]},
+{id:"ginger",n:"Ginger (Zanjabil)",i:"🫚",cat:"sunnah",h:1,had:"'The Prophet ﷺ was offered ginger to eat and he ate it.' — Abu Nu'aym",qr:"They will be given to drink a cup whose mixture is of ginger. — Al-Insan 76:17",sci:"Gingerol has potent anti-inflammatory and antioxidant effects. Improves blood circulation to the brain. Aids digestion and reduces nausea.",adhd:"Reduces neuroinflammation linked to attention deficits. Improves cerebral blood flow. Settles the stomach — important since ADHD medication can cause nausea.",dose:"Fresh ginger tea: slice 2cm root, steep in hot water 5 min + honey. Or ½ tsp ground ginger in food.",nut:["Gingerol","Shogaol","Vitamin C","Magnesium"]},
+{id:"milk",n:"Milk (Laban)",i:"🥛",cat:"sunnah",h:1,had:"'The Prophet ﷺ was brought milk and he drank it and said: When one of you eats food let him say Bismillah.' — Bukhari/Muslim",qr:"Pure milk, palatable to those who drink it. — An-Nahl 16:66",sci:"Rich in tryptophan (precursor to serotonin and melatonin), calcium, and complete protein. Casein provides slow-release energy.",adhd:"Tryptophan before bed supports melatonin production — critical for ADHD sleep issues. Calcium supports neurotransmitter release. Warm milk + honey = traditional sleep aid with real science.",dose:"1 glass warm milk with honey before bed. Or yogurt/kefir for gut health.",nut:["Tryptophan","Calcium","Protein","B12","Vitamin D"]},
+{id:"vinegar",n:"Vinegar (Khall)",i:"🫙",cat:"sunnah",h:1,had:"'What an excellent condiment vinegar is.' — Muslim 2052",qr:"",sci:"Apple cider vinegar slows gastric emptying → steadier blood sugar. Acetic acid improves insulin sensitivity. Antimicrobial properties support gut health.",adhd:"Blood sugar stability is one of the biggest controllable factors in ADHD focus. ACV with meals reduces post-meal crashes that destroy concentration.",dose:"1 tbsp apple cider vinegar in water before meals. Dilute always — never drink straight.",nut:["Acetic Acid","Potassium","Probiotics (raw)"]},
+{id:"watermelon",n:"Watermelon (Bittikh)",i:"🍉",cat:"sunnah",h:1,had:"'The Prophet ﷺ used to eat watermelon with fresh dates.' — Abu Dawud 3836",qr:"",sci:"92% water — excellent for hydration. Rich in lycopene (antioxidant) and L-citrulline which improves blood flow. Natural sugars with low glycemic load.",adhd:"Dehydration impairs cognition significantly — even 2% dehydration reduces attention and working memory. Watermelon hydrates AND provides brain-friendly nutrients.",dose:"2+ cups daily in summer. With dates as the Prophet ﷺ did.",nut:["Lycopene","L-Citrulline","Vitamin C","Vitamin A"]},
+{id:"salmon",n:"Fatty Fish",i:"🐟",cat:"brain",h:1,had:"The Prophet ﷺ ate fish and permitted all seafood.",qr:"He subjected the sea for you to eat tender meat. — An-Nahl 16:14",sci:"Richest DHA + EPA source. DHA = 40% of brain cell membranes. Studies show 25-40% ADHD symptom reduction.",adhd:"DHA deficiency is one of the most consistent ADHD biomarkers. Improves attention and working memory in 8-12 weeks.",dose:"2-3 servings/week of salmon, sardines, mackerel.",nut:["DHA","EPA","Vitamin D","Selenium","B12"]},
+{id:"eggs",n:"Eggs",i:"🥚",cat:"brain",h:1,had:"The Prophet ﷺ was known to eat eggs.",qr:"",sci:"147mg choline per egg → acetylcholine, THE neurotransmitter for attention, learning, memory.",adhd:"Acetylcholine is the focus neurotransmitter. ADHD meds partly work through cholinergic pathways. Eggs support this naturally.",dose:"2-3 eggs before noon. Eat the whole egg — yolk has the choline.",nut:["Choline","Complete Protein","Vitamin D","B12","Lutein"]},
+{id:"walnuts",n:"Walnuts",i:"🥜",cat:"brain",h:1,had:"",qr:"",sci:"Highest plant omega-3 (ALA: 2.5g/28g). Polyphenols reduce brain oxidative stress. UCLA: better cognition.",adhd:"Plant-based omega-3 alternative. Cracking/eating is sensory-motor activity that helps ADHD regulation.",dose:"A handful (28g / ~14 halves) daily.",nut:["ALA Omega-3","Polyphenols","Vitamin E","Copper"]},
+{id:"pomegranate",n:"Pomegranate",i:"🍎",cat:"quran_fruit",h:1,had:"'No pomegranate without a pip from Jannah.' — Ahmad",qr:"In both gardens are fruit, palm trees and pomegranates. — Ar-Rahman 55:68",sci:"Punicalagins improve cerebral blood flow by up to 30%. Highest antioxidant fruit.",adhd:"ADHD brains have reduced prefrontal blood flow. Pomegranate directly addresses this = better executive function.",dose:"½ cup seeds daily or 240ml pure juice.",nut:["Punicalagins","Ellagic Acid","Vitamin C","Potassium"]},
+{id:"figs",n:"Figs (Tin)",i:"🫐",cat:"quran_fruit",h:1,had:"'If a fruit descended from paradise, I would say this is it.'",qr:"By the fig and the olive. — At-Tin 95:1",sci:"High fiber, potassium, calcium. Prebiotic support for gut microbiome diversity.",adhd:"Gut diversity = mental health. Figs feed bacteria that produce neurotransmitters. Fiber stabilizes blood sugar.",dose:"2-3 figs daily with yogurt and honey.",nut:["Fiber","Potassium","Calcium","Prebiotics"]},
+{id:"turmeric",n:"Turmeric",i:"🟡",cat:"brain",h:1,had:"",qr:"",sci:"Curcumin crosses blood-brain barrier. Increases BDNF, boosts serotonin and dopamine. UCLA: 28% memory boost.",adhd:"Reduces neuroinflammation while boosting dopamine and serotonin. Add black pepper for 2000% absorption.",dose:"½ tsp daily with black pepper + fat. Golden milk.",nut:["Curcumin","Iron","Manganese","B6"]},
+{id:"energy",n:"Energy Drinks",i:"⚡",cat:"avoid",h:0,had:"'There should be neither harm nor reciprocal harm.' — Ibn Majah",qr:"Do not throw yourselves into destruction. — 2:195",sci:"300-500mg caffeine + 50-80g sugar. Artificial dopamine spike → crash → dependency cycle.",adhd:"The crash makes ADHD symptoms SIGNIFICANTLY worse. Creates debt: borrow energy now, pay double later.",dose:"AVOID. Replace with green tea or dates + water.",nut:["⚠️ Excess Caffeine","⚠️ Refined Sugar","⚠️ Artificial Colors"]},
+{id:"sugar",n:"Refined Sugar",i:"🍬",cat:"avoid",h:0,had:"The Prophet ﷺ warned against excess (israf).",qr:"Eat and drink but do not be excessive. — 7:31",sci:"Glucose spike → insulin crash → brain fog → more cravings. Feeds pathogenic gut bacteria.",adhd:"ADHD brains have dopamine regulation problems. Sugar creates fake dopamine that worsens the dysfunction.",dose:"MINIMIZE. Replace with dates, honey, dark chocolate 85%+.",nut:["⚠️ Empty Calories","⚠️ Inflammation","⚠️ Gut Dysbiosis"]},
+{id:"processed",n:"Ultra-Processed",i:"🍟",cat:"avoid",h:0,had:"'The son of Adam fills no vessel worse than his stomach.' — Tirmidhi 2380",qr:"Eat from the good things We provided. — 2:57",sci:"The Lancet (2007): artificial food coloring significantly worsens ADHD. Preservatives disrupt gut-brain axis.",adhd:"Food additives are one of the FEW proven environmental factors that worsen ADHD symptoms.",dose:"Fewer ingredients = better. If it has a TV ad, be suspicious.",nut:["⚠️ Artificial Colors","⚠️ Preservatives","⚠️ Trans Fats"]},
+{id:"skip",n:"Skipping Breakfast",i:"🚫",cat:"avoid",h:0,had:"'Take suhoor, for in it there is barakah.' — Bukhari 1923",qr:"",sci:"After 8-12hr fasting, brain glycogen depleted. Impaired working memory, attention, impulse control.",adhd:"Your prefrontal cortex cannot function on empty. ADHD mornings are hard enough.",dose:"EAT within 1hr of waking: 3 dates + 2 eggs + water.",nut:["⚠️ No Fuel","⚠️ Cortisol Spike","⚠️ Blood Sugar Crash"]},
+];
+const MCAT=[{id:"all",l:"All"},{id:"sunnah",l:"Sunnah"},{id:"brain",l:"Brain"},{id:"quran_fruit",l:"Quran Fruits"},{id:"avoid",l:"Avoid"}];
+
+// ═══ QUESTS — struggle-weighted ═══
+const QS=[
+{id:"fajr",t:"Fajr Warrior",d:"Pray Fajr today",i:"🌅",xp:30,df:"medium",tags:["salah","morning"]},
+{id:"dhuhr",t:"Noon Anchor",d:"Pray Dhuhr on time",i:"☀️",xp:20,df:"easy",tags:["salah"]},
+{id:"task1",t:"One-Thing Hero",d:"Complete #1 task",i:"☝️",xp:35,df:"medium",tags:["focus"]},
+{id:"task3",t:"Triple Threat",d:"Finish 3 tasks",i:"⚡",xp:50,df:"hard",tags:["focus"]},
+{id:"dump",t:"Brain Dump",d:"Write 5+ thoughts",i:"💭",xp:15,df:"easy",tags:["focus"]},
+{id:"f25",t:"Deep Diver",d:"25-min focus block",i:"🎯",xp:30,df:"medium",tags:["focus"]},
+{id:"protein",t:"Brain Fuel",d:"Protein before noon",i:"🥚",xp:20,df:"easy",tags:["food","morning"]},
+{id:"sunnah_f",t:"Sunnah Snack",d:"Eat a Prophetic food",i:"🫒",xp:15,df:"easy",tags:["food"]},
+{id:"water",t:"Water Bearer",d:"6+ glasses today",i:"💧",xp:20,df:"easy",tags:["food"]},
+{id:"nosugar",t:"Sugar Slayer",d:"No refined sugar today",i:"🍬",xp:45,df:"hard",tags:["food"]},
+{id:"dhikr_q",t:"Dhikr Drop",d:"SubhanAllah 33x",i:"📿",xp:15,df:"easy",tags:["salah"]},
+{id:"quran_r",t:"Quran Moment",d:"Read 2 ayahs",i:"📖",xp:20,df:"easy",tags:["salah"]},
+{id:"walk",t:"Fresh Air",d:"10 min outside",i:"🚶",xp:20,df:"easy",tags:["focus","morning"]},
+{id:"sleep",t:"Isha & Sleep",d:"Pray Isha, devices off",i:"😴",xp:35,df:"hard",tags:["salah","morning"]},
+{id:"bfast",t:"Breakfast Hero",d:"Eat within 1hr of waking",i:"🌅",xp:20,df:"easy",tags:["food","morning"]},
+{id:"gratitude",t:"Gratitude",d:"Write 3 thankful things",i:"✨",xp:20,df:"easy",tags:["focus"]},
+];
+
+const PL={sprout:{s:["🌱","🌿","🪴","🌳"],n:"Oak"},flower:{s:["🌱","🌿","🌷","🌸"],n:"Cherry"},palm:{s:["🌱","🌿","🌴","🌴"],n:"Palm"},rose:{s:["🌱","🌿","🥀","🌹"],n:"Rose"},sun:{s:["🌱","🌿","🌻","🌻"],n:"Sunflower"},herb:{s:["🌱","🌿","🍃","🍀"],n:"Clover"}};
+const JN=[{n:"The Desert",l:"🏜️",xp:0},{n:"The Oasis",l:"🏝️",xp:200},{n:"The Garden",l:"🌿",xp:500},{n:"The Village",l:"🏘️",xp:1000},{n:"The Masjid",l:"🕌",xp:2000},{n:"The Mountain",l:"🏔️",xp:3500},{n:"The Holy City",l:"🕋",xp:5500}];
+const DK=[{ar:"سُبْحَانَ اللَّهِ",en:"SubhanAllah",n:33,co:'#1B7A4A'},{ar:"الْحَمْدُ لِلَّهِ",en:"Alhamdulillah",n:33,co:'#8B6914'},{ar:"اللَّهُ أَكْبَرُ",en:"Allahu Akbar",n:33,co:'#0D6B6E'},{ar:"لَا إِلٰهَ إِلَّا اللَّهُ",en:"La ilaha illAllah",n:10,co:'#5E35B1'}];
+
+// ═══ GUILT-FREE CIRCUIT BREAKER MESSAGES ═══
+const CB_MSGS=[
+  {ar:"لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ",en:"Do not despair of Allah's mercy.",ref:"Az-Zumar 39:53",msg:"Missing a prayer doesn't define you. Allah sees your struggle. Make wudu, pray now, and let go of the guilt."},
+  {ar:"رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا",en:"Our Lord, do not blame us if we forget or make a mistake.",ref:"Al-Baqarah 2:286",msg:"ADHD means forgetting things. That's not laziness — it's how your brain works. Allah knows. Get up and try again."},
+  {ar:"إِنَّ اللَّهَ يُحِبُّ التَّوَّابِينَ",en:"Indeed, Allah loves those who are constantly repenting.",ref:"Al-Baqarah 2:222",msg:"The fact that you feel guilty means your heart is alive. That guilt IS iman. Now turn it into one small action."},
+];
+
+
+// ═══ STATE + LOCALSTORAGE ═══
+const LS='focusbridge_v10';
+function ldS(){try{const d=localStorage.getItem(LS);if(d){const p=JSON.parse(d);if(p.ver===10)return p;}}catch(e){}return null;}
+function svS(){try{localStorage.setItem(LS,JSON.stringify({...S,ver:10}));}catch(e){}}
+const DEF={phase:'onboard',obS:0,mode:null,name:'',str:null,scr:'home',xp:0,sal:{Fajr:0,Dhuhr:0,Asr:0,Maghrib:0,Isha:0},qD:{},dk:[0,0,0,0],gd:Array(9).fill(0).map(()=>({t:null,g:0})),col:[],ac:'all',as:'',mc:'all',mo:null,lastDay:'',wk:[],city:'',lat:50.63,lng:5.57};
+let S=ldS()||JSON.parse(JSON.stringify(DEF));
+(function(){const td=new Date().toDateString();if(S.lastDay!==td){S.qD={};S.dk=[0,0,0,0];S.sal={Fajr:0,Dhuhr:0,Asr:0,Maghrib:0,Isha:0};S.lastDay=td;S.wk.push({d:new Date().toLocaleDateString('en',{weekday:'short'}),s:0,q:0,x:0});if(S.wk.length>7)S.wk=S.wk.slice(-7);svS();}if(!S.wk.length){S.wk=Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return{d:d.toLocaleDateString('en',{weekday:'short'}),s:0,q:0,x:0};});}})();
+
+// ═══ PRAYER TIMES — Aladhan API + local fallback ═══
+let PT={Fajr:'05:30',Sunrise:'07:00',Dhuhr:'12:30',Asr:'15:30',Maghrib:'18:00',Isha:'19:30'};
+let PT_SOURCE='calculating...';
+
+// Local solar calc fallback (approximate)
+function calcLocal(lat,lng){const d=new Date(),n=Math.floor(d/864e5)+2440587.5-2451545,ec=-23.44*Math.cos((360/365*(d.getDate()+10))*Math.PI/180),dR=ec*Math.PI/180,lR=lat*Math.PI/180,eq=-7.655*Math.sin((357.528+.9856003*n)*Math.PI/180)+9.873*Math.sin(2*((280.46+.9856474*n)+1.914*Math.sin((357.528+.9856003*n)*Math.PI/180))*Math.PI/180),nn=12-lng/15-eq/60,ha=a=>Math.acos((Math.sin(a*Math.PI/180)-Math.sin(lR)*Math.sin(dR))/(Math.cos(lR)*Math.cos(dR)))*180/Math.PI/15,f=h=>{const hr=Math.floor(h),mn=Math.round((h-hr)*60);return`${String(hr).padStart(2,'0')}:${String(mn).padStart(2,'0')}`;};return{Fajr:f(nn-ha(-18)),Sunrise:f(nn-ha(-.833)),Dhuhr:f(nn+.02),Asr:f(nn+ha(45)*.67),Maghrib:f(nn+ha(-.833)),Isha:f(nn+ha(-17))};}
+
+// Aladhan API (Islamic prayer calculation methods: 12=ISNA, 2=ISNA, 3=MWL, 15=Moonsighting)
+async function fetchPrayer(lat,lng){
+  try{
+    const d=new Date();
+    const url=`https://api.aladhan.com/v1/timings/${Math.floor(d/1000)}?latitude=${lat}&longitude=${lng}&method=12&school=0`;
+    const r=await fetch(url);
+    const j=await r.json();
+    if(j.code===200&&j.data&&j.data.timings){
+      const t=j.data.timings;
+      PT={Fajr:t.Fajr,Sunrise:t.Sunrise,Dhuhr:t.Dhuhr,Asr:t.Asr,Maghrib:t.Maghrib,Isha:t.Isha};
+      PT_SOURCE=j.data.meta.method?.name||'Aladhan';
+      R();return true;
+    }
+  }catch(e){}
+  return false;
+}
+
+// Geolocation → Aladhan → fallback
+async function initPrayer(){
+  // Try local calc first for instant display
+  PT=calcLocal(S.lat,S.lng);PT_SOURCE='local calc';R();
+  // Then try geolocation
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(
+      async(pos)=>{
+        S.lat=pos.coords.latitude;S.lng=pos.coords.longitude;svS();
+        const ok=await fetchPrayer(S.lat,S.lng);
+        if(!ok){PT=calcLocal(S.lat,S.lng);PT_SOURCE='local (offline)';R();}
+      },
+      async()=>{// Denied or error — use stored/default coords
+        const ok=await fetchPrayer(S.lat,S.lng);
+        if(!ok){PT=calcLocal(S.lat,S.lng);PT_SOURCE='local (offline)';R();}
+      },
+      {timeout:5000,maximumAge:3600000}
+    );
+  }else{
+    const ok=await fetchPrayer(S.lat,S.lng);
+    if(!ok){PT=calcLocal(S.lat,S.lng);PT_SOURCE='local (offline)';R();}
+  }
+}
+
+// ═══ HELPERS ═══
+const ki=()=>S.mode==='kid';
+const sd=(()=>{const d=new Date(),s=d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate();let h=0;for(let i=0;i<s.length;i++){h=((h<<5)-h)+s.charCodeAt(i);h|=0;}return Math.abs(h);})();
+const tM=t=>{const p=t.split(':').map(Number);return p[0]*60+p[1];},nM=()=>{const d=new Date();return d.getHours()*60+d.getMinutes();},fC=m=>{if(m<0)m+=1440;const h=Math.floor(m/60);return h>0?h+'h '+m%60+'m':m%60+'m';};
+function nP(){const n=nM(),o=["Fajr","Sunrise","Dhuhr","Asr","Maghrib","Isha"];for(const p of o){const m=tM(PT[p]);if(m>n)return{name:p,time:PT[p],mins:m-n};}return{name:"Fajr",time:PT.Fajr,mins:tM(PT.Fajr)+1440-n};}
+function gQ(){const tag=S.str||'';let pool=[...QS];if(tag)pool.sort((a,b)=>(b.tags.includes(tag)?1:0)-(a.tags.includes(tag)?1:0));const e=pool.filter(q=>q.df==='easy'),m=pool.filter(q=>q.df==='medium'),hard=pool.filter(q=>q.df==='hard');return[e[sd%e.length],m[(sd*7)%m.length],e[(sd*3+1)%e.length],hard.length?hard[(sd*13)%hard.length]:m[(sd*11)%m.length]];}
+function gS(x){let s=JN[0];for(const j of JN)if(x>=j.xp)s=j;return s;}
+function gN(x){const s=gS(x),i=JN.indexOf(s);return i<JN.length-1?JN[i+1]:null;}
+function ring(v,sz=40,sk=3,co='#34d399'){const r=(sz-sk)/2,ci=2*Math.PI*r,of=ci-Math.min(v/100,1)*ci;return`<svg width="${sz}" height="${sz}" style="transform:rotate(-90deg)"><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="${sk}"/><circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${co}" stroke-width="${sk}" stroke-dasharray="${ci}" stroke-dashoffset="${of}" stroke-linecap="round" style="transition:stroke-dashoffset .8s"/></svg>`;}
+
+// ═══ RENDER ═══
+function R(){const a=document.getElementById('app');if(!a)return;if(S.phase==='onboard'){rOB(a);return;}const km=ki()?'kid':'';let c='';if(S.scr==='home')c=rH();else if(S.scr==='quran')c=rQ();else if(S.scr==='med')c=rM();else if(S.scr==='garden')c=rG();else if(S.scr==='me')c=rMe();a.innerHTML=`<div class="sc ${km}" id="sc">${c}</div><nav class="nv" role="navigation">${[{id:'home',i:'🏠',l:'Home'},{id:'quran',i:'📖',l:'Quran'},{id:'med',i:'🌿',l:'Medicine'},{id:'garden',i:'🌸',l:'Garden'},{id:'me',i:'📊',l:'Me'}].map(n=>`<button class="nb ${S.scr===n.id?'a':''}" onclick="nav('${n.id}')" aria-label="${n.l}"><div class="ni">${n.i}</div><span class="nl">${n.l}</span></button>`).join('')}</nav>`;}
+
+// ═══ ONBOARDING ═══
+function rOB(a){let h='<div class="sc" style="display:flex;align-items:center;padding:24px"><div style="width:100%">';
+if(S.obS===0){h+=`<div class="afi" style="text-align:center"><p class="ar" style="font-size:22px;color:var(--gld);margin-bottom:16px;line-height:1.6">بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</p><h1 style="font-size:34px;margin-bottom:8px">FocusBridge 🌿</h1><p style="font-size:16px;color:var(--tx2)">Islamic ADHD Companion</p><p style="font-size:14px;color:var(--tx3);margin:4px 0 32px">Your ADHD and your deen are <em>not</em> in conflict.</p><div style="display:flex;gap:12px;margin-bottom:20px"><button onclick="sM('kid')" style="flex:1;padding:28px 14px;border-radius:20px;background:rgba(251,191,36,.08);border:2px solid rgba(251,191,36,.2);cursor:pointer"><div style="font-size:46px;margin-bottom:8px">🧒</div><div style="font-size:18px;font-weight:800;color:var(--gld)">Kids</div><div style="font-size:12px;color:var(--tx3)">Ages 7-14</div></button><button onclick="sM('adult')" style="flex:1;padding:28px 14px;border-radius:20px;background:rgba(52,211,153,.08);border:2px solid rgba(52,211,153,.2);cursor:pointer"><div style="font-size:46px;margin-bottom:8px">🧑</div><div style="font-size:18px;font-weight:800;color:var(--grn)">Adults</div><div style="font-size:12px;color:var(--tx3)">Ages 15+</div></button></div><p style="font-size:11px;color:var(--tx4)">📖 80 verses · 🌿 19 remedies · ⚔️ Quests · 🌸 Garden · 📊 Insights</p></div>`;
+}else if(S.obS===1){const kk=ki();h+=`<div class="afi"><div style="display:flex;gap:4px;margin-bottom:20px">${[1,2,3].map(i=>`<div style="flex:1;height:4px;border-radius:2px;background:${i<=1?'var(--grn)':'var(--bdr)'}"></div>`).join('')}</div><h2 style="padding:0 0 6px">${kk?"What's hardest? 🤔":"What's your biggest struggle?"}</h2><p style="font-size:14px;color:var(--tx3);margin-bottom:18px">${kk?"Pick one!":"This personalizes your quests."}</p>${[{id:'salah',i:'🤲',t:kk?"Remembering prayers":"Keeping up with Salah",d:kk?"I forget!":"Time blindness + prayer guilt"},{id:'focus',i:'🎯',t:kk?"Staying focused":"Focus & tasks",d:kk?"Brain goes everywhere":"Executive function"},{id:'food',i:'🧠',t:kk?"Eating well":"Nutrition & energy",d:kk?"Skip meals":"Brain fog + crashes"},{id:'morning',i:'🌅',t:kk?"Mornings!":"Starting the day",d:kk?"Can't wake up":"Fajr + breakfast"}].map(o=>`<button onclick="sS('${o.id}')" style="width:100%;display:flex;align-items:center;gap:14px;padding:14px;margin-bottom:8px;border-radius:16px;background:var(--card);border:1.5px solid var(--bdr2);cursor:pointer;text-align:left;font-family:inherit"><div style="font-size:26px;width:48px;height:48px;border-radius:14px;background:var(--grn2);display:flex;align-items:center;justify-content:center;flex-shrink:0">${o.i}</div><div><div style="font-weight:700;font-size:15px;color:var(--tx)">${o.t}</div><div style="font-size:12px;color:var(--tx3)">${o.d}</div></div></button>`).join('')}</div>`;
+}else if(S.obS===2){h+=`<div class="afi"><div style="display:flex;gap:4px;margin-bottom:20px">${[1,2,3].map(i=>`<div style="flex:1;height:4px;border-radius:2px;background:${i<=2?'var(--grn)':'var(--bdr)'}"></div>`).join('')}</div><h2 style="padding:0 0 6px">${ki()?"Your name? 😊":"What should we call you?"}</h2><p style="font-size:14px;color:var(--tx3);margin-bottom:18px">Optional — skip if you prefer.</p><input style="width:100%;padding:16px 18px;border-radius:16px;background:var(--card);border:1.5px solid var(--bdr);color:var(--tx);font-size:18px;font-weight:600;font-family:inherit;outline:none" id="ni" placeholder="Your name..." value="${S.name}" onkeyup="if(event.key==='Enter')oN()"><button class="btn btn1" onclick="oN()" style="margin-top:14px">Continue →</button></div>`;
+}else{h+=`<div style="text-align:center" class="afi"><div style="display:flex;gap:4px;margin-bottom:20px">${[1,2,3].map(()=>`<div style="flex:1;height:4px;border-radius:2px;background:var(--grn)"></div>`).join('')}</div><div style="font-size:60px;margin-bottom:14px">🌿</div><h1 style="font-size:30px;margin-bottom:6px">Bismillah${S.name?', '+S.name:''} ✨</h1><p style="font-size:15px;color:var(--tx2)">Your companion is ready.</p><p class="ar" style="font-size:20px;color:var(--gld);margin:20px 0 6px">فَإِنَّ مَعَ الْعُسْرِ يُسْرًا</p><p style="font-size:12px;color:var(--tx3);font-style:italic;margin-bottom:28px">"With hardship comes ease" — 94:5</p><button class="btn btn2" onclick="go()" style="font-size:17px">${ki()?'Let\'s go! 🚀':'Start My Journey 🌿'}</button></div>`;}
+h+='</div></div>';a.innerHTML=h;}
+
+// ═══ HOME ═══
+function rH(){const np=nP(),st=gS(S.xp),ns=gN(S.xp),qs=gQ(),qd=Object.keys(S.qD).length,qt=qs.length,uc=np.mins<=30?C.rd:np.mins<=60?C.gld:C.tl,fv=S.col.length?AY.filter(a=>S.col.includes(a.id))[Math.floor(Date.now()/864e5)%S.col.length]:AY[2],kk=ki(),cb=CB_MSGS[sd%CB_MSGS.length];
+let h=`<div class="pg"><div style="padding:14px 0 10px"><p class="ar" style="font-size:15px;color:var(--gld);text-align:center;margin-bottom:4px">بِسْمِ ٱللَّهِ</p><h1>${kk?'Hey '+(S.name||'there')+'! 🌟':(S.name?'Asalamaleykum '+S.name:'Asalamaleykum')}</h1><p style="font-size:13px;color:var(--tx3)">${new Date().toLocaleDateString('en',{weekday:'long',month:'long',day:'numeric'})} · ${st.l} ${st.n} · ${S.xp} XP</p></div>`;
+h+=`<div class="c"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:22px">🕌</span><div><p style="font-size:10px;font-weight:700;color:${uc};text-transform:uppercase">${kk?'Next up':'Next'}: ${np.name}</p><p style="font-size:20px;font-weight:800">${np.time}</p></div></div><p style="font-size:22px;font-weight:800;color:${uc};${np.mins<=15?'animation:cp 1.5s ease infinite':''}">${fC(np.mins)}</p></div><div style="display:flex;gap:4px">${['Fajr','Dhuhr','Asr','Maghrib','Isha'].map(p=>{const nx=p===np.name,pr=S.sal[p]>0;return`<button onclick="cSl('${p}')" class="pp ${pr?'dn':nx?'nx':''}" style="font-family:inherit"><div style="font-size:10px;font-weight:700;color:${pr?C.grn:nx?C.tl:'var(--tx3)'}">${p}</div><div style="font-size:12px;font-weight:700;color:${pr?C.grn:'var(--tx)'}">${PT[p]}</div>${pr?'<div style="font-size:9px;color:'+C.grn+'">✓</div>':''}</button>`;}).join('')}</div><p style="font-size:10px;color:var(--tx4);text-align:center;margin-top:6px">${PT_SOURCE} · Tap: ✓ prayed · ½ late · ○ reset</p></div>`;
+h+=`<div class="c cb"><p class="cap" style="color:var(--prp);margin-bottom:6px">${kk?'💜 REMINDER':'💜 GUILT-FREE ZONE'}</p><p class="ar" style="font-size:16px;line-height:2;margin-bottom:4px">${cb.ar}</p><p style="font-size:13px;color:var(--tx2);font-style:italic;margin-bottom:4px">"${cb.en}" — ${cb.ref}</p><p style="font-size:12px;color:var(--tx3);line-height:1.5">${kk?"Forgot a prayer? That's OK! Allah still loves you. Just pray now 💚":cb.msg}</p></div>`;
+if(fv){h+=`<div class="c" style="border-left:3px solid ${RC[fv.r]}"><p class="cap" style="margin-bottom:6px">📖 VERSE OF THE DAY</p><p class="ar" style="font-size:${kk?20:18}px;line-height:2;margin-bottom:6px">${fv.ar}</p><p style="font-size:${kk?15:14}px;color:var(--tx2);font-style:italic;line-height:1.5">"${fv.en}"</p><p style="font-size:11px;color:${RC[fv.r]};font-weight:700;margin-top:6px">— ${fv.s} ${fv.v} <span class="tg" style="background:${RBG[fv.r]};color:${RC[fv.r]}">${fv.r}</span></p></div>`;}
+h+=`<div class="c"><p class="cap" style="margin-bottom:8px">📿 DAILY DHIKR</p><div style="display:flex;gap:6px">${DK.map((d,i)=>{const dn=S.dk[i]>=d.n;return`<button onclick="dkk(${i})" style="flex:1;padding:10px 4px;border-radius:14px;background:${dn?d.co+'15':'var(--card2)'};border:2px solid ${dn?d.co:'var(--bdr2)'};cursor:pointer;font-family:inherit"><div style="font-size:20px;font-weight:800;color:${d.co}">${S.dk[i]}</div><div style="font-size:9px;font-weight:700;color:var(--tx3)">${d.en.split(' ').pop()}</div><div style="font-size:8px;color:${dn?d.co:'var(--tx4)'}">${dn?'✓':'/ '+d.n}</div></button>`;}).join('')}</div></div>`;
+h+=`<div style="display:flex;align-items:center;justify-content:space-between;margin:4px 0 8px"><h3>${kk?'⚔️ Quests!':'⚔️ Today\'s Quests'}</h3><div style="position:relative;width:32px;height:32px">${ring(qt>0?(qd/qt)*100:0,32,2.5,qd===qt?C.gld:C.grn)}<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:${qd===qt?C.gld:C.grn}">${qd}/${qt}</div></div></div>`;
+qs.forEach((q,i)=>{const d=S.qD[q.id],dc=q.df==='hard'?C.rd:q.df==='medium'?C.gld:C.grn;h+=`<div class="c qt ${d?'d':''} afi" style="border-left-color:${d?'transparent':dc+'40'};animation-delay:${i*50}ms" ${d?'':`onclick="dQ('${q.id}')"`}><div style="display:flex;align-items:center;gap:12px"><div style="width:46px;height:46px;border-radius:14px;flex-shrink:0;background:${d?'var(--grn2)':dc+'0a'};display:flex;align-items:center;justify-content:center;font-size:22px;border:1.5px solid ${d?'var(--grn3)':dc+'20'}">${d?'<span style="color:'+C.grn+'">✓</span>':q.i}</div><div style="flex:1"><div style="display:flex;align-items:center;gap:5px"><span style="font-size:14px;font-weight:700;color:${d?'var(--tx4)':'var(--tx)'};${d?'text-decoration:line-through':''}">${q.t}</span><span class="tg" style="background:${dc}10;color:${dc}">${q.df.toUpperCase()}</span></div><p style="font-size:12px;color:var(--tx3)">${q.d}</p></div><span style="font-size:14px;font-weight:800;color:${d?'var(--tx4)':C.gld}">+${q.xp}</span></div></div>`;});
+h+=`<div class="c" style="border-left:3px solid var(--gld)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:26px">${st.l}</span><div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--gld)">${st.n}</div>${ns?`<div style="font-size:11px;color:var(--tx3)">${ns.xp-S.xp} XP to ${ns.n}</div>`:''}</div><div style="font-size:20px;font-weight:800;color:var(--gld)">${S.xp}</div></div>${ns?`<div style="margin-top:8px;height:5px;border-radius:3px;background:var(--bdr2);overflow:hidden"><div style="height:100%;border-radius:3px;background:linear-gradient(90deg,#fbbf24,#34d399);width:${Math.min(((S.xp-st.xp)/(ns.xp-st.xp))*100,100)}%"></div></div>`:''}</div></div>`;return h;}
+
+// ═══ QURAN ═══
+function rQ(){const fl=S.ac==='all'?AY:AY.filter(a=>a.cat===S.ac);const sr=S.as?fl.filter(a=>a.en.toLowerCase().includes(S.as.toLowerCase())||a.s.toLowerCase().includes(S.as.toLowerCase())||a.ar.includes(S.as)):fl;const kk=ki();
+let h=`<div class="pg"><h2>${kk?'📖 Quran! ✨':'📖 Quran Library'}</h2><p class="sub" style="margin-bottom:12px">${AY.length} verses, ${AYCAT.length-1} themes. ${kk?'Tap to collect!':'Tap any verse to collect it.'}</p><div style="position:relative;margin-bottom:10px"><span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;opacity:.4">🔍</span><input class="srch" placeholder="Search verses..." value="${S.as}" oninput="S.as=this.value;R()"></div><div class="tabs">${AYCAT.map(c=>`<button class="tab ${S.ac===c.id?'a':''}" onclick="S.ac='${c.id}';R()">${c.l}</button>`).join('')}</div><p style="font-size:12px;color:var(--tx4);margin-bottom:10px">${sr.length} verse${sr.length!==1?'s':''} · ${S.col.length} collected</p>`;
+sr.forEach((a,i)=>{const o=S.col.includes(a.id),rc=RC[a.r];h+=`<div class="c afi" style="animation-delay:${Math.min(i*25,200)}ms;${o?'border-left:3px solid '+rc:''}" ${o?'':`onclick="colA(${a.id})"`}><div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><span class="tg" style="background:${RBG[a.r]};color:${rc}">${a.r}</span><span style="font-size:11px;color:var(--tx3);font-weight:600">${a.s} ${a.v}</span>${o?`<span style="margin-left:auto;font-size:11px;color:${C.grn};font-weight:700">✓</span>`:'<span style="margin-left:auto;font-size:11px;color:var(--tx4)">Tap +</span>'}</div><p class="ar" style="font-size:${kk?20:18}px;line-height:2.1;margin-bottom:6px">${a.ar}</p><p style="font-size:${kk?15:14}px;color:var(--tx2);font-style:italic;line-height:1.5">"${a.en}"</p></div>`;});
+if(!sr.length)h+='<div style="text-align:center;padding:40px;color:var(--tx4)"><p style="font-size:28px;margin-bottom:8px">🔍</p><p>No verses found.</p></div>';h+='</div>';return h;}
+
+// ═══ MEDICINE ═══
+function rM(){const fl=S.mc==='all'?MD:MD.filter(m=>m.cat===S.mc);const kk=ki();
+let h=`<div class="pg"><h2>${kk?'🌿 Brain Food!':'🌿 Prophetic Medicine'}</h2><p class="sub" style="margin-bottom:12px">${MD.length} foods & remedies. ${kk?'What to eat & skip!':'Hadith, Quran, science, ADHD impact.'}</p><div class="tabs">${MCAT.map(c=>`<button class="tab ${S.mc===c.id?'a':''}" onclick="S.mc='${c.id}';S.mo=null;R()">${c.l}</button>`).join('')}</div>`;
+fl.forEach((m,i)=>{const op=S.mo===m.id,dc=m.h?C.grn:C.rd,bg=m.h?'var(--grn2)':'var(--rd2)',bdr=m.h?'var(--grn3)':'var(--rd3)';
+h+=`<div class="c afi" style="animation-delay:${Math.min(i*30,200)}ms;${op?'border-color:'+dc+'40':''}"><div onclick="S.mo=S.mo==='${m.id}'?null:'${m.id}';R()" style="display:flex;align-items:center;gap:12px;cursor:pointer"><div style="font-size:28px;width:48px;height:48px;border-radius:14px;background:${bg};display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1.5px solid ${bdr}">${m.i}</div><div style="flex:1"><div style="display:flex;align-items:center;gap:6px"><span style="font-size:15px;font-weight:700">${m.n}</span><span class="tg" style="background:${bg};color:${dc}">${m.h?(kk?'EAT':'HERO'):(kk?'SKIP':'AVOID')}</span></div><p style="font-size:12px;color:var(--tx3);margin-top:2px;line-height:1.4">${m.adhd.substring(0,80)}…</p></div><span style="font-size:12px;color:var(--tx4);transform:rotate(${op?180:0}deg);display:inline-block">▼</span></div>`;
+if(op){h+=`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--bdr2)">`;
+if(m.had)h+=`<div style="padding:12px;border-radius:12px;background:var(--gld2);border:1px solid var(--gld3);margin-bottom:8px"><p class="cap" style="color:var(--gld)">📜 HADITH</p><p style="font-size:13px;color:var(--tx2);line-height:1.6;margin-top:4px">${m.had}</p></div>`;
+if(m.qr)h+=`<div style="padding:12px;border-radius:12px;background:var(--prp2);border:1px solid var(--prp3);margin-bottom:8px"><p class="cap" style="color:var(--prp)">📖 QURAN</p><p style="font-size:13px;color:var(--tx2);line-height:1.6;font-style:italic;margin-top:4px">${m.qr}</p></div>`;
+h+=`<div style="padding:12px;border-radius:12px;background:var(--tl2);border:1px solid var(--tl3);margin-bottom:8px"><p class="cap" style="color:var(--tl)">🔬 SCIENCE</p><p style="font-size:13px;color:var(--tx2);line-height:1.6;margin-top:4px">${m.sci}</p></div>`;
+h+=`<div style="padding:12px;border-radius:12px;background:var(--grn2);border:1px solid var(--grn3);margin-bottom:8px"><p class="cap" style="color:var(--grn)">🧠 ADHD IMPACT</p><p style="font-size:13px;color:var(--tx2);line-height:1.6;margin-top:4px">${m.adhd}</p></div>`;
+h+=`<div style="padding:12px;border-radius:12px;background:var(--gld2);border:1px solid var(--gld3);margin-bottom:8px"><p class="cap" style="color:var(--gld)">💊 HOW TO USE</p><p style="font-size:13px;color:var(--tx2);line-height:1.6;margin-top:4px">${m.dose}</p></div>`;
+h+=`<div style="display:flex;flex-wrap:wrap;gap:4px">${m.nut.map(n=>`<span class="tg" style="background:${n.startsWith('⚠')?'var(--rd2)':'var(--grn2)'};color:${n.startsWith('⚠')?'var(--rd)':'var(--grn)'}">${n}</span>`).join('')}</div></div>`;}
+h+='</div>';});h+='</div>';return h;}
+
+// ═══ GARDEN ═══
+function rG(){const gp=S.gd.filter(s=>s.t).length,fg=S.gd.filter(s=>s.g>=3).length;
+let h=`<div class="pg"><h2>🌸 Your Garden</h2><p class="sub" style="margin-bottom:12px">Complete quests to grow plants. Your garden never dies.</p><div style="border-radius:20px;overflow:hidden;margin-bottom:12px;background:linear-gradient(180deg,rgba(52,211,153,.08),rgba(34,211,238,.06) 50%,rgba(167,139,250,.04));border:1px solid rgba(52,211,153,.15);padding:24px 14px 18px"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">${S.gd.map((sl)=>{const it=sl.t?PL[sl.t]:null,em=it?it.s[Math.min(sl.g,3)]:null;return`<div class="gc" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.06)">${em?`<span style="font-size:34px;${sl.g>=3?'animation:sw 3s ease infinite':''}">${em}</span><span style="font-size:8px;color:var(--tx3);font-weight:700;margin-top:2px">${it.n}</span>${sl.g<3?`<div style="display:flex;gap:2px;margin-top:2px">${[0,1,2,3].map(g=>`<div style="width:6px;height:3px;border-radius:1px;background:${g<=sl.g?C.grn+'80':'rgba(0,0,0,.1)'}"></div>`).join('')}</div>`:''}`:'<span style="font-size:20px;opacity:.15">+</span>'}</div>`;}).join('')}</div></div>`;
+h+=`<div style="display:flex;gap:8px;margin-bottom:12px">${[{n:gp,l:'Plants',c:C.grn,bg:'var(--grn2)'},{n:fg,l:'Grown',c:C.gld,bg:'var(--gld2)'},{n:9-gp,l:'Empty',c:'var(--tx4)',bg:'var(--card2)'}].map(s=>`<div class="c" style="flex:1;text-align:center;background:${s.bg}"><div style="font-size:22px;font-weight:800;color:${s.c}">${s.n}</div><div style="font-size:10px;color:var(--tx3);font-weight:700">${s.l}</div></div>`).join('')}</div>`;
+h+=`<h3 style="margin-bottom:8px">📿 Ayah Collection — ${S.col.length}/${AY.length}</h3><div class="c"><div style="display:flex;align-items:center;gap:10px"><div style="position:relative;width:46px;height:46px">${ring((S.col.length/AY.length)*100,46,3.5,C.prp)}<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:${C.prp}">${S.col.length}</div></div><div><p style="font-size:13px;font-weight:700">${S.col.length} of ${AY.length} collected</p><p style="font-size:11px;color:var(--tx3)">Collect from Quran tab or quest drops!</p></div></div></div></div>`;return h;}
+
+// ═══ INSIGHTS ═══
+function rMe(){const wl=S.wk.length?S.wk:Array(7).fill({d:'—',s:0,q:0,x:0});const tS=wl.reduce((s,d)=>s+(d.s||0),0),tX=wl.reduce((s,d)=>s+(d.x||0),0),mX=Math.max(...wl.map(d=>d.x||0),1);const st=gS(S.xp),ns=gN(S.xp);
+let h=`<div class="pg"><h2>📊 Insights</h2><p class="sub" style="margin-bottom:12px">Your week at a glance.</p>`;
+h+=`<div class="c" style="text-align:center;background:var(--gld2);border-color:var(--gld3)"><p class="cap" style="color:var(--gld)">WEEKLY XP</p><div style="font-size:40px;font-weight:900;color:var(--gld)">${tX}</div></div>`;
+h+=`<div class="c"><p class="cap" style="margin-bottom:8px">📊 DAILY XP</p><div style="display:flex;gap:4px;align-items:flex-end;height:80px">${wl.map((d,i)=>{const p=mX>0?((d.x||0)/mX)*100:0;const t=i===wl.length-1;return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-size:9px;font-weight:700;color:${t?C.gld:'var(--tx4)'}">${d.x||0}</span><div style="width:100%;border-radius:5px;background:${t?'linear-gradient(var(--gld),var(--grn))':'var(--grn2)'};height:${Math.max(p,8)}%;min-height:4px"></div><span style="font-size:8px;color:${t?C.gld:'var(--tx4)'}">${d.d}</span></div>`;}).join('')}</div></div>`;
+h+=`<div class="c"><p class="cap" style="margin-bottom:8px">🤲 PRAYERS</p><div style="display:flex;gap:4px;align-items:flex-end;height:60px">${wl.map((d)=>{const p=((d.s||0)/5)*100;return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px"><span style="font-size:9px;font-weight:700;color:${(d.s||0)>=5?C.gld:'var(--tx4)'}">${d.s||0}/5</span><div style="width:100%;border-radius:5px;background:${(d.s||0)>=5?'var(--gld2)':'var(--tl2)'};height:${Math.max(p,8)}%;min-height:4px"></div><span style="font-size:8px;color:var(--tx4)">${d.d}</span></div>`;}).join('')}</div><div style="margin-top:8px;padding:8px 12px;border-radius:10px;background:var(--tl2);border:1px solid var(--tl3)"><p style="font-size:12px;color:var(--tl);font-weight:600">${tS}/35 prayers. ${tS>=30?'ما شاء الله!':tS>=20?'Momentum!':'Every prayer counts.'}</p></div></div>`;
+h+=`<div class="c" style="border-left:3px solid var(--gld)"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:28px">${st.l}</span><div style="flex:1"><div style="font-size:14px;font-weight:700;color:var(--gld)">${st.n}</div><div style="font-size:11px;color:var(--tx3)">${S.xp} XP${ns?' · '+(ns.xp-S.xp)+' to '+ns.n:''}</div></div></div>${ns?`<div style="margin-top:8px;height:5px;border-radius:3px;background:var(--bdr2)"><div style="height:100%;border-radius:3px;background:linear-gradient(90deg,#fbbf24,#34d399);width:${Math.min(((S.xp-st.xp)/(ns.xp-st.xp))*100,100)}%"></div></div>`:''}</div>`;
+h+=`<div style="display:flex;gap:8px;margin-top:12px"><button onclick="S.phase='onboard';S.obS=0;svS();R()" style="flex:1;padding:10px;border-radius:12px;background:var(--card);border:1.5px solid var(--bdr);color:var(--tx3);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">⚙️ Restart</button><button onclick="if(confirm('Erase all data?')){localStorage.removeItem('focusbridge_v10');location.reload();}" style="flex:1;padding:10px;border-radius:12px;background:var(--rd2);border:1.5px solid var(--rd3);color:var(--rd);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">🗑️ Reset</button></div></div>`;return h;}
+
+// ═══ LOOT ═══
+function sL(tp,dt){const o=document.createElement('div');o.className='lo';o.onclick=()=>o.remove();let ps='';const cl=['#DAA520','#fff','#4ADE80','#2DD4BF','#A78BFA'];for(let i=0;i<25;i++)ps+=`<div style="position:absolute;border-radius:50%;width:${2+Math.random()*5}px;height:${2+Math.random()*5}px;background:${cl[i%5]};left:${50+(Math.random()-.5)*80}%;top:${40+(Math.random()-.5)*60}%;animation:cf 1.5s ease ${Math.random()*400}ms forwards;opacity:0"></div>`;
+let c='';if(tp==='ayah'){const rc=RC[dt.r];c=`<div style="font-size:14px;font-weight:700;color:${rc};letter-spacing:2px;text-transform:uppercase;margin-bottom:12px">${dt.r==='legendary'?'⭐ LEGENDARY':dt.r==='epic'?'💎 EPIC':'✨ '+dt.r.toUpperCase()}</div><div style="background:rgba(15,20,35,.95);border-radius:20px;backdrop-filter:blur(20px);padding:22px;border:2px solid ${rc}40"><p class="ar" style="font-size:20px;color:#f0ede6;line-height:2;margin-bottom:8px">${dt.ar}</p><p style="font-size:13px;color:#c8c4bb;font-style:italic">"${dt.en}"</p><p style="font-size:11px;color:${rc};font-weight:700;margin-top:8px">— ${dt.s} ${dt.v}</p></div>`;}else{c=`<div style="font-size:48px;margin-bottom:8px">${dt.icon}</div><h3 style="font-size:20px;font-weight:800;color:#DAA520;margin-bottom:4px">${dt.title}</h3><p style="font-size:13px;color:#c8c4bb">${dt.desc}</p><div style="margin-top:10px;padding:5px 16px;border-radius:12px;background:rgba(74,222,128,.2);display:inline-block"><span style="font-size:15px;font-weight:800;color:#4ADE80">+${dt.xp} XP</span></div>`;}
+o.innerHTML=`${ps}<div style="text-align:center;z-index:2;padding:30px;max-width:340px;animation:pi .5s ease .1s both">${c}</div>`;document.body.appendChild(o);setTimeout(()=>{if(document.body.contains(o))o.remove();},4500);}
+
+// ═══ ACTIONS ═══
+function nav(s){S.scr=s;R();setTimeout(()=>{const e=document.getElementById('sc');if(e)e.scrollTop=0;},30);}
+function sM(m){S.mode=m;S.obS=1;R();}
+function sS(s){S.str=s;S.obS=2;R();}
+function oN(){const i=document.getElementById('ni');if(i)S.name=i.value.trim();S.obS=3;R();}
+function go(){S.phase='app';S.scr='home';svS();R();}
+function dkk(i){S.dk[i]++;if(S.dk[i]===DK[i].n){S.xp+=5;updWk(5);}svS();R();}
+function cSl(p){const was=S.sal[p];S.sal[p]=was===0?1:was===1?.5:0;if(S.sal[p]===1){S.xp+=10;updWk(10,1);}else if(was===1){S.xp=Math.max(0,S.xp-10);updWk(-10,-1);}svS();R();}
+function colA(id){if(!S.col.includes(id)){S.col.push(id);S.xp+=5;updWk(5);svS();R();const a=AY.find(x=>x.id===id);if(a)setTimeout(()=>sL('ayah',a),300);}}
+function updWk(xp,sal){if(S.wk.length){const t=S.wk[S.wk.length-1];t.x=(t.x||0)+xp;if(sal)t.s=(t.s||0)+sal;}}
+function dQ(id){if(S.qD[id])return;const q=QS.find(x=>x.id===id);if(!q)return;S.qD[id]=true;S.xp+=q.xp;updWk(q.xp);
+const gw=S.gd.filter(s=>s.t&&s.g<3);if(gw.length)gw[Math.floor(Math.random()*gw.length)].g++;
+else{const em=S.gd.findIndex(s=>!s.t);if(em>=0){const ty=Object.keys(PL);S.gd[em]={t:ty[Math.floor(Math.random()*ty.length)],g:0};}}
+if(Math.random()<.25){const unc=AY.filter(a=>!S.col.includes(a.id));if(unc.length){const wt=unc.map(a=>a.r==='legendary'?1:a.r==='epic'?3:a.r==='rare'?6:10),tw=wt.reduce((s,w)=>s+w,0);let r=Math.random()*tw,pk=unc[0];for(let i=0;i<unc.length;i++){r-=wt[i];if(r<=0){pk=unc[i];break;}}S.col.push(pk.id);svS();R();setTimeout(()=>sL('ayah',pk),400);return;}}
+svS();R();setTimeout(()=>sL('xp',{icon:q.i,title:'Quest Complete!',desc:q.t,xp:q.xp}),300);}
+
+// ═══ INIT ═══
+R();
+initPrayer();
+setInterval(()=>{if(S.phase==='app'&&S.scr==='home')R();},30000);
+</script>
+</body>
+</html>
